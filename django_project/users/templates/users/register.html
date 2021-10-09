@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+        <div class="card-panel">
+                <form method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                                <legend> Join today</legend>
+                                {{ form.as_p }}
+                        </fieldset>
+                        <div>
+                                <button>Sign up</button>
+                        </div>
+                </form>
+                <div>
+                        <small>Already have an account?</small>
+                </div>
+        </div>
+{% endblock content %}
