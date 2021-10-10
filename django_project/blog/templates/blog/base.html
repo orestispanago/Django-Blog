@@ -20,6 +20,7 @@
             <div class="container">
                 <a href="{% url 'blog-home' %}" class="brand-logo">Logo</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="admin/">Admin</a></li>
                     <li><a href="{% url 'blog-about' %}">About</a></li>
                     <li><a href="{% url 'register' %}">Register</a></li>
                 </ul>
@@ -40,11 +41,21 @@
 <script>
     {% if messages %}
         {% for message in messages %}
-            window.addEventListener('load', function() {
-              var elems = document.querySelectorAll('.modal');
-              var instances = M.Modal.init(elems);
-            });
-            M.toast({html: '{{ message }}'});
+            var color;
+            {% if message.tags == 'success'%}
+                color = 'green lighten-2';
+            {% elif message.tags == 'info' %}
+                color = 'blue lighten-2';
+            {% elif message.tags == 'warning' %}
+                color = 'yellow lighten-2';
+            {% elif message.tags == 'error' %}
+                color = 'red lighten-2';
+            {% endif %}
+                    window.addEventListener('load', function() {
+                      var elems = document.querySelectorAll('.modal');
+                      var instances = M.Modal.init(elems);
+                    });
+                    M.toast({html: '{{ message }}', classes: color });
         {% endfor %}
     {% endif %}
 </script>
